@@ -431,7 +431,7 @@
       },
       legend: payload.legend || { zeroColor: '#243155', ranges: [] },
       geo: payload.geo || { type: 'FeatureCollection', features: [] },
-      regions: Array.isArray(payload.regions) ? payload.regions : [],
+      regions: Array.isArray(payload.regions) ? payload.regions.filter(r => r.regionKey === 'region-jawa-barat-kota-tasikmalaya') : [],
       provinceView: {
         legend: (payload.provinceView && payload.provinceView.legend) || {
           zeroColor: '#243155',

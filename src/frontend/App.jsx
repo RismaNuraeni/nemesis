@@ -15,10 +15,10 @@ export function App() {
     <div id="preact-wrapper">
       <div class="hdr">
         <div class="hdr-l">
-          <div class="logo">AUD</div>
+          <div class="logo">TSM</div>
           <div class="hdr-t">
-            <h1>Audit Pengadaan per Kab/Kota</h1>
-            <span>Artifact hasil analyze &middot; LKPP / SiRUP &middot; Tahun Anggaran 2026</span>
+            <h1>Portal Pemantauan Anggaran Kota Tasikmalaya</h1>
+            <span>Sistem Monitoring Pengadaan &middot; LKPP / SiRUP &middot; Tahun Anggaran 2026</span>
           </div>
         </div>
         <div class="hdr-r">

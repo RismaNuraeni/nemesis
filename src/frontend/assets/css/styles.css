@@ -1,25 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 :root {
-  --b0: #111d35;
-  --b1: #162040;
-  --b2: #1c2847;
-  --b2h: #243155;
-  --bd: #2a3a5e;
-  --ba: #7b86a3;
-  --t1: #e8e4dc;
-  --t2: #a09b8e;
-  --t3: #6b6758;
-  --sage: #b5a882;
-  --olive: #8b7332;
-  --rose: #d4a999;
-  --brick: #a83c2e;
-  --maroon: #3a1510;
-  --steel: #7b86a3;
-  --sage-g: rgba(181, 168, 130, 0.15);
-  --olive-g: rgba(139, 115, 50, 0.15);
-  --rose-g: rgba(212, 169, 153, 0.15);
-  --brick-g: rgba(168, 60, 46, 0.15);
-  --steel-g: rgba(123, 134, 163, 0.15);
+  --b0: #0d1f0f;
+  --b1: #122614;
+  --b2: #173019;
+  --b2h: #1e3d21;
+  --bd: #254d29;
+  --ba: #7a9e7e;
+  --t1: #dce8dc;
+  --t2: #9aaf9a;
+  --t3: #6b7d6b;
+  --sage: #82b582;
+  --olive: #336633;
+  --rose: #99d4a0;
+  --brick: #2e7a3c;
+  --maroon: #103a15;
+  --steel: #7a9e7e;
+  --sage-g: rgba(130, 181, 130, 0.15);
+  --olive-g: rgba(51, 102, 51, 0.15);
+  --rose-g: rgba(153, 212, 160, 0.15);
+  --brick-g: rgba(46, 122, 60, 0.15);
+  --steel-g: rgba(122, 158, 126, 0.15);
 }
 * {
   margin: 0;
