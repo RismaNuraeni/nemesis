@@ -311,20 +311,37 @@ function queryOwnerPackagesPage(db, ownerType, ownerName, normalizedQuery) {
 }
 
 function getBootstrapPayload(db) {
-  const summaryRow = getNationalSummary(db);
-  const regions = getRegionRows(db).map(mapRegionRow);
-  const provinces = getProvinceRows(db).map(mapProvinceRow);
+  const TASIKMALAYA_KEY = 'region-jawa-barat-kota-tasikmalaya';
+  
+  const allRegions = getRegionRows(db).map(mapRegionRow);
+  const regions = allRegions.filter(r => r.regionKey === TASIKMALAYA_KEY);
+  
+  const tasik = regions[0] || null;
+  
+  const summary = tasik ? {
+    totalPackages: tasik.totalPackages,
+    totalPriorityPackages: tasik.totalPriorityPackages,
+    totalPotentialWaste: tasik.totalPotentialWaste,
+    totalBudget: tasik.totalBudget,
+    unmappedPackages: 0,
+    multiLocationPackages: 0,
+  } : {
+    totalPackages: 0,
+    totalPriorityPackages: 0,
+    totalPotentialWaste: 0,
+    totalBudget: 0,
+    unmappedPackages: 0,
+    multiLocationPackages: 0,
+  };
+
+  const provinces = getProvinceRows(db)
+    .map(mapProvinceRow)
+    .filter(p => p.provinceName === 'Jawa Barat');
+
   const centralOwners = getOwnerRows(db, 'central').map(mapOwnerRow);
 
   return {
-    summary: {
-      totalPackages: summaryRow.total_packages || 0,
-      totalPriorityPackages: summaryRow.total_priority_packages || 0,
-      totalPotentialWaste: summaryRow.total_potential_waste || 0,
-      totalBudget: summaryRow.total_budget || 0,
-      unmappedPackages: summaryRow.unmapped_packages || 0,
-      multiLocationPackages: summaryRow.multi_location_packages || 0,
-    },
+    summary,
     legend: buildLegend(regions.map((region) => region.totalPotentialWaste)),
     geo: getJsonAsset(db, 'audit_geojson', { type: 'FeatureCollection', features: [] }),
     regions,

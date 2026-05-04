@@ -65,9 +65,13 @@ export async function createApp() {
     res.json({ status: 'ok' });
   });
 
-  app.get('/api/bootstrap', (_req, res) => {
-    res.json(getBootstrapPayload(db));
-  });
+app.get('/api/bootstrap', (_req, res) => {
+    const payload = getBootstrapPayload(db);
+    payload.regions = payload.regions.filter(
+      r => r.regionKey === 'region-jawa-barat-kota-tasikmalaya'
+    );
+    res.json(payload);
+});
 
   app.get('/api/regions/:regionKey/packages', (req, res) => {
     const payload = getRegionPackages(db, req.params.regionKey, req.query);
