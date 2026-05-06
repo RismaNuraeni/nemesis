@@ -15,7 +15,9 @@ export function App() {
     <div id="preact-wrapper">
       <div class="hdr">
         <div class="hdr-l">
-          <div class="logo">TSM</div>
+          <div class="logo">
+            <img src="/assets/logo.png" alt="Logo" />
+          </div>
           <div class="hdr-t">
             <h1>Portal Pemantauan Anggaran Kota Tasikmalaya</h1>
             <span>Sistem Monitoring Pengadaan &middot; LKPP / SiRUP &middot; Tahun Anggaran 2026</span>
