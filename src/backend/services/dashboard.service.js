@@ -311,19 +311,43 @@ function queryOwnerPackagesPage(db, ownerType, ownerName, normalizedQuery) {
 }
 
 function getBootstrapPayload(db) {
-  const summaryRow = getNationalSummary(db);
-  const regions = getRegionRows(db).map(mapRegionRow);
-  const provinces = getProvinceRows(db).map(mapProvinceRow);
-  const centralOwners = getOwnerRows(db, 'central').map(mapOwnerRow);
 
+  const TASIKMALAYA_KEY = 'region-jawa-barat-kota-tasikmalaya';
+  const allRegions = getRegionRows(db).map(mapRegionRow);
+  const regions = allRegions.filter(r => r.regionKey === TASIKMALAYA_KEY);
+
+
+  const provinces = getProvinceRows(db).map(mapProvinceRow)
+  .filter(p => p.provinceName === 'Jawa Barat');;
+
+const tasikOwnerNames = db.prepare(`
+    SELECT DISTINCT packages.owner_name
+    FROM package_regions
+    INNER JOIN packages ON packages.id = package_regions.package_id
+    WHERE package_regions.region_key = ?
+    AND packages.owner_type = 'central'
+`).all(TASIKMALAYA_KEY).map(r => r.owner_name);
+
+const centralOwners = getOwnerRows(db, 'central')
+    .map(mapOwnerRow)
+    .filter(o => tasikOwnerNames.includes(o.ownerName));
+
+ const tasik = regions[0] || null;
   return {
-    summary: {
-      totalPackages: summaryRow.total_packages || 0,
-      totalPriorityPackages: summaryRow.total_priority_packages || 0,
-      totalPotentialWaste: summaryRow.total_potential_waste || 0,
-      totalBudget: summaryRow.total_budget || 0,
-      unmappedPackages: summaryRow.unmapped_packages || 0,
-      multiLocationPackages: summaryRow.multi_location_packages || 0,
+    summary: tasik ? {
+      totalPackages: tasik.totalPackages || 0,
+      totalPriorityPackages: tasik.totalPriorityPackages || 0,
+      totalPotentialWaste: tasik.totalPotentialWaste || 0,
+      totalBudget: tasik.totalBudget || 0,
+      unmappedPackages: tasik.unmappedPackages || 0,
+      multiLocationPackages: tasik.multiLocationPackages || 0,
+    } : {
+      totalPackages: 0,
+      totalPriorityPackages: 0,
+      totalPotentialWaste: 0,
+      totalBudget: 0,
+      unmappedPackages: 0,
+      multiLocationPackages: 0,
     },
     legend: buildLegend(regions.map((region) => region.totalPotentialWaste)),
     geo: getJsonAsset(db, 'audit_geojson', { type: 'FeatureCollection', features: [] }),
