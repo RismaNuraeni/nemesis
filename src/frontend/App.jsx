@@ -16,7 +16,7 @@ export function App() {
       <div class="hdr">
         <div class="hdr-l">
           <div class="logo">
-            <img src="/assets/logo.png" alt="Logo" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Logo_Kota_Tasikmalaya.png" alt="Logo" />
           </div>
           <div class="hdr-t">
             <h1>Portal Pemantauan Anggaran Kota Tasikmalaya</h1>
